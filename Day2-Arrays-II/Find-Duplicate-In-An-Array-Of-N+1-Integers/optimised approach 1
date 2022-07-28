@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int find_duplicate(int a[], int n)
+{
+    unordered_map<int, int> m;
+    for (int i = 0; i < n; i++)
+    {
+        if (m.find(a[i]) != m.end())
+        {
+            return a[i];
+        }
+        m[a[i]]++;
+    }
+    return 0;
+}
+
+int main()
+{
+    cout << "enter the value of n";
+    int n;
+    cin >> n;
+    cout << "enter the array  \n";
+    int a[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    int ans = find_duplicate(a, n);
+    cout << ans;
+    return 0;
+}

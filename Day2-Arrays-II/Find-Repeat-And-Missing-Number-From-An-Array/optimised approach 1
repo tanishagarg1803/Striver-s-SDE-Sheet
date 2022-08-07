@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void find_dup_miss(int a[], int n)
+{
+    int miss, dup;
+    int s = (n * (n + 1)) / 2;
+    int p = (n * (n + 1) * (2 * n + 1)) / 6;
+    int s1 = 0, p1 = 0;
+    for (int i = 0; i < n; i++)
+    {
+        s1 += a[i];
+        p1 += a[i] * a[i];
+    }
+    int s2 = s - s1;
+    int p2 = p - p1;
+    miss = (p2 / s2 + s2) / 2;
+    dup = miss - s2;
+    cout << "duplicate element is " << dup << " and missing number is " << miss;
+}
+
+int main()
+{
+    cout << "enter the value of n: ";
+    int n;
+    cin >> n;
+    cout << "enter the array: ";
+    int a[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    find_dup_miss(a, n);
+    return 0;
+}

@@ -1,0 +1,65 @@
+// by applying merge sort
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int merge(int a[], int temp[], int l, int mid, int r)
+{
+    int count = 0;
+    int i = l, j = mid, k = l;
+    while ((i <= mid - 1) && (j <= r))
+    {
+        if (a[i] <= a[j])
+        {
+            temp[k++] = a[i++];
+        }
+        else
+        {
+            temp[k++] = a[j++];
+            count = count + (mid - i);
+        }
+    }
+    while (i <= mid - 1)
+    {
+        temp[k++] = a[i++];
+    }
+    while (j <= r)
+    {
+        temp[k++] = a[j++];
+    }
+    for (int i = l; i <= r; i++)
+    {
+        a[i] = temp[i];
+    }
+    return count;
+}
+
+int count_inversion(int a[], int temp[], int l, int r)
+{
+    int c = 0, mid;
+    if (r > l)
+    {
+        mid = (l + r) / 2;
+        c += count_inversion(a, temp, l, mid);
+        c += count_inversion(a, temp, mid + 1, r);
+        c += merge(a, temp, l, mid + 1, r);
+    }
+    return c;
+}
+
+int main()
+{
+    cout << "enter the value of n: ";
+    int n;
+    cin >> n;
+    cout << "enter the array: ";
+    int a[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    int temp[n];
+    int ans = count_inversion(a, temp, 0, n - 1);
+    cout << "no of inversion pairs of an array is : " << ans;
+    return 0;
+}

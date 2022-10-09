@@ -63,3 +63,5 @@ int main()
     cout << "no of inversion pairs of an array is : " << ans;
     return 0;
 }
+
+
